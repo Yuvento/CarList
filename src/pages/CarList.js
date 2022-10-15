@@ -6,6 +6,8 @@ import FormCar from '../component/searchCar/FormCar'
 
 const CarList = () => {
     const [cars,setCars] = useState([])
+    const [filteredCars, setFilteredCars]= useState([])
+    const [isFiltered,setIsFiltered] =useState(true)
     const [form,setForm] = useState ({
         name:'',
         category : '',
@@ -16,7 +18,7 @@ const CarList = () => {
 
    const getCars = async() => {
     try{
-        const response = await axios.get('https://bootcamp-rent-car.herokuapp.com/admin/car')
+        const response = await axios.get('https://bootcamp-rent-cars.herokuapp.com/customer/v2/car')
         const data = response.data;
         console.log(data)
         setCars(data);
@@ -26,9 +28,19 @@ const CarList = () => {
     }
    } 
 
+   //handlesearch ganti nama filtercar
     const handleSearch = ()=>{
+        setIsFiltered(true)
         let data = cars
         let check = form.status === "true" ? true:false
+        //check ganti isRendted
+        //price ganti range
+
+        const filteredData = cars.filter(car=>{
+            if (car.name?.toLowerCase().includes(form.name) && car.category===form.category){
+                return car
+            }
+        })
 
         if(form.name !== ""){
             data = data.filter(item => item.name === form.name)
@@ -46,15 +58,17 @@ const CarList = () => {
             data = data.filter(item => item.status === check)
             console.log( data.filter(item => item.status === check))          
         }
-        setCars(data)
+        
+
+        setFilteredCars(filteredData)
         console.log(data)
     }
 
 return (
     <Container>
-        <FormCar  getCars={getCars} setForm={setForm} />
+        <FormCar isFiltered={sFiltered} getCars={getCars} setForm={setForm} />
         <Row xs={1} md={4} className="g-4">
-            {cars.map(car=>(
+            {filteredCars.map(car=>(
                 <Col>
                     <Card className='mt-5' key={car.id}>
                     {car.image != null ?<Card.Img  src={car.image}/>:<Card.Img  src={PlaceholderImage}/>}
