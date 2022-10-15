@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container , Card , Col , Row , Form , Button} from 'react-bootstrap'
 
-const FormCar = ({handleSearch,setForm}) => {
+const FormCar = ({getCars,setForm}) => {
   return (
     <Container className="mt-3">
       <Card>
@@ -32,7 +32,7 @@ const FormCar = ({handleSearch,setForm}) => {
                           <Form.Label className='ms-4' ><small>Harga</small></Form.Label>
                           <Form.Select size= "sm" className="Form-Control ms-4" onChange={(event) => setForm(prev => ({...prev, price: event.target.value}))}>
                             <option>Masukan Harga sewa per Hari</option>
-                            <option value={25000}>Rp. 2.000.000.000</option>
+                            <option value="250000">Rp. 2.000.000.000</option>
                             <option value="5000000000">Rp. 5.000.000.000</option>
                           </Form.Select>
                     </Form.Group>
@@ -44,14 +44,14 @@ const FormCar = ({handleSearch,setForm}) => {
                   <Form.Label className='ms-4' ><small>Status</small></Form.Label>
                   <Form.Select size= "sm" className="Form-Control ms-4" onChange={(event) => setForm(prev => ({...prev, status: event.target.value}))}>
                       <option >Pilih Status</option>
-                      <option value={true}>Disewa</option>
-                      <option value={false}>tidak disewa</option>
+                      <option value="true">Disewa</option>
+                      <option value="false">tidak disewa</option>
                   </Form.Select>
                   </Form.Group>
                 </Form>
             </Col>
               <Col >
-                  <Button  className=" mt-4 ms-5 " variant="success" type="submit" onClick={handleSearch}>Cari Mobil</Button>
+                  <Button  className=" mt-4 ms-5 " variant="success" type="submit" onClick={getCars}>Cari Mobil</Button>
               </Col>
           </Row>
       </Card>
