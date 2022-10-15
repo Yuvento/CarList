@@ -91,10 +91,9 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 					</Col>
 					<Col>
 						<Button
-							className=" mt-4 ms-5 "
-							variant="success"
-							type="submit"
-							onClick={onSearchCar}
+							className="mt-4 ms-5"
+							variant={isFiltered ? 'secondary' : 'success'}
+							onClick={isFiltered ? () => {} : onSearchCar}
 						>
 							{isFiltered ? 'Edit' : 'Cari Mobil'}
 						</Button>
