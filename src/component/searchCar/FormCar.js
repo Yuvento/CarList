@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Card, Col, Row, Form, Button } from 'react-bootstrap';
 
+
+
 const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 	return (
 		<Container className="mt-3">
@@ -62,9 +64,8 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 									}
 								>
 									<option>Masukan Harga sewa per Hari</option>
-									{/* <option value="400000">< Rp. 400.000</option>
-									<option value="5000000000">Rp. 400.000 - Rp.600.000</option>
-									<option value="600000">>  Rp.600.000</option> */}
+									<option value="200000"> Rp.200.000 - Rp.400.000</option>
+									<option value="500000"> Rp.400.000 - Rp.600.000</option>
 								</Form.Select>
 							</Form.Group>
 						</Form>
@@ -83,7 +84,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 									}
 								>
 									<option>Pilih Status</option>
-									<option value="true">Disewa</option>
+									<option value="true">Disewa  </option>
 									<option value="false">tidak disewa</option>
 								</Form.Select>
 							</Form.Group>
@@ -92,7 +93,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 					<Col>
 						<Button
 							className="mt-4 ms-5"
-							variant={isFiltered ? 'secondary' : 'success'}
+							variant={isFiltered ? 'outline-primary' : 'success'}
 							onClick={isFiltered ? () => {} : onSearchCar}
 						>
 							{isFiltered ? 'Edit' : 'Cari Mobil'}

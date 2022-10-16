@@ -7,7 +7,7 @@ import FormCar from '../component/searchCar/FormCar';
 const CarList = () => {
 	const [cars, setCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
-	const [isFiltered, setIsFileted] = useState(false);
+	const [isFiltered, setIsFiltered] = useState(false);
 	const [form, setForm] = useState({
 		name: '',
 		category: '',
@@ -27,23 +27,28 @@ const CarList = () => {
 
 			const data = response.data;
 			setCars(data.cars);
+            console.log(data)
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
 	const filterCar = () => {
-		setIsFileted(true);
+		setIsFiltered(true);
 		let isRented = form.status === 'true' ? true : false;
-
+		// let isNumber = Number(form.price)
+	
 		const filteredData = cars.filter((car) => {
 			if (
 				car.name?.toLowerCase().includes(form.name.toLowerCase()) &&
 				car.category === form.category &&
-				car.status === isRented
+				// car.price <= isNumber &&
+				car.status === isRented 				
 			) {
 				return car;
 			}
+			
+
 		});
 
 		setFilteredCars(filteredData);
