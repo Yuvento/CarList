@@ -6,7 +6,7 @@ const BlankFormCar = () => {
 	return (
 		<Container className="mt-3">
 			<Card>
-				<h6 className="ms-1">Pencarianmu</h6>
+				<h6 className="ms-2">Pencarianmu</h6>
 				<Row>
 					<Col>
 						<Form>

@@ -5,6 +5,7 @@ import PlaceholderImage from '../assets/image/no-image.png';
 import FormCar from '../component/FormCar/FormCar';
 import {useNavigate } from 'react-router-dom';
 
+
 const CarList = () => {
 	const [cars, setCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
@@ -23,9 +24,8 @@ const CarList = () => {
 	const getCars = async () => {
 		try {
 			const response = await axios.get(
-				'https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?pageSize=100'
+				'https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?pageSize=10'
 			);
-
 			const data = response.data;
 			setCars(data.cars);
             console.log(data)
@@ -38,14 +38,13 @@ const CarList = () => {
 		setIsFiltered(true);
 		let isRented = form.status === 'true' ? true : false;
 		// let isNumber = Number(form.price)
-	
 		const filteredData = cars.filter((car) => {
 			if (
 				car.name?.toLowerCase().includes(form.name.toLowerCase()) &&
 				car.category === form.category &&
 				// car.price <= isNumber &&
 				// price ga bs
-				car.status === isRented 				
+				car.status === isRented			
 			) {
 				return car;
 			} 
@@ -59,7 +58,7 @@ const CarList = () => {
 	let navigate = useNavigate()
 
 	const handleViewDetail = (id)=>{
-        navigate(`/cars/{id}`)
+        navigate(`/cars/${id}`)
     }
 
 	return (

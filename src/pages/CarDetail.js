@@ -1,10 +1,11 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
-import BlankFormCar from "../component/BlankFormCar/BlankFormCar"
-import { Card, Container, Row, Col, Accordion  } from 'react-bootstrap';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams} from 'react-router-dom';
+import BlankFormCar from '../component/BlankFormCar/BlankFormCar';
+import { Card, Container, Row, Col, Accordion ,Form, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import './CarDetail.css'
 
 
 const CarDetail = () => {
@@ -14,9 +15,9 @@ const CarDetail = () => {
     const getCars = async () => {
 		try {
             //id gadapat
-			const response = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?pageSize=100/${id}`)
+			const response = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
 			const data = response.data;
-			setCars(data.cars);
+			setCars(data);
             console.log(data)
 		} catch (err) {
 			console.log(err);
@@ -35,57 +36,72 @@ const CarDetail = () => {
                 <Col>
                     <Card>
                         <Card.Body >
-                            <h2>Tentang Paket</h2>
+                            <h5><strong>Tentang Paket</strong></h5>
+                            <h5 className="mt-3"><strong>Includes</strong></h5>
                             <ul>
-                                <li><h4>Apa saja yang termasuk dalam paket misal durasi max 12 jam</h4></li>
-                                <li><h4>Sudah termasuk bensin selama 12 jam</h4></li>
-                                <li><h4>Sudah termasuk Tiket Wisata</h4></li>
-                                <li><h4>Sudah termasuk pajak</h4></li>
+                                <li>Apa saja yang termasuk dalam paket misal durasi max 12 jam</li>
+                                <li>Sudah termasuk bensin selama 12 jam</li>
+                                <li>Sudah termasuk Tiket Wisata</li>
+                                <li>Sudah termasuk pajak</li>
                             </ul>
-                            <h2>Exclude</h2>
+                            <h5 className="mt-3"><strong>Excludes</strong></h5>
                             <ul>
-                                <li><h4>Tidak termasuk biaya makan sopir Rp 75000/hari</h4></li>
-                                <li><h4>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</h4></li>
-                                <li><h4>Tidak termasuk okomodasi penginapan</h4></li>
+                                <li>Tidak termasuk biaya makan sopir Rp 75000/hari</li>
+                                <li>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</li>
+                                <li>Tidak termasuk okomodasi penginapan</li>
                             </ul>
-                            <Accordion defaultActiveKey="0" >
-                                    <Accordion eventKey="0" >
-                                        <Accordion.Header >
-                                            <h2>Refund, Reschedule, Overtime</h2>
-                                        </Accordion.Header>
-                                        <Accordion.Body >
-                                            <ul>
-                                                <li> <h4>Tidak termasuk biaya makan sopir Rp 75.000/hari</h4></li>
-                                                <li> <h4>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</h4></li>
-                                                <li> <h4>Tidak termasuk akomodasi penginapan</h4></li>
-                                                <li> <h4>Tidak termasuk biaya makan sopir Rp 75.000/hari</h4></li>
-                                                <li> <h4>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</h4></li>
-                                                <li> <h4>Tidak termasuk akomodasi penginapan</h4></li>
-                                                <li> <h4>Tidak termasuk biaya makan sopir Rp 75.000/hari</h4></li>
-                                                <li> <h4>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</h4></li>
-                                                <li> <h4>Tidak termasuk akomodasi penginapan</h4></li>
-                                            </ul>
-                                        </Accordion.Body>
-                                    </Accordion>
+                            <Accordion >
+                                <Accordion.Header>
+                                    <h5 className="mt-3"><strong>Refund, Reschedule, Overtime</strong></h5>
+                                </Accordion.Header>
+                                <Accordion.Body >
+                                    <ul>
+                                        <li> Tidak termasuk biaya makan sopir Rp75.000/hari</li>
+                                        <li> Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp20.000/jam</li>
+                                        <li> Tidak termasuk akomodasi penginapan</li>
+                                        <li> Tidak termasuk biaya makan sopir Rp75.000/hari</li>
+                                        <li> Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp20.000/jam</li>
+                                        <li> Tidak termasuk akomodasi penginapan</li>
+                                        <li> Tidak termasuk biaya makan sopir Rp75.000/hari</li>
+                                        <li> Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp20.000/jam</li>
+                                        <li> Tidak termasuk akomodasi penginapan</li>
+                                    </ul>
+                                </Accordion.Body>
                                 </Accordion>
                         </Card.Body>
                     </Card>
                 </Col>
             
                 <Col>
-                    <Card style={{ width: '50rem' }}>
+                    <Card >
                             <Card.Img variant="top"  src={cars.image} />
                             <Card.Body>
                                 <Card.Title>
-                                    <h1>{cars.name}</h1>
-                                    <FontAwesomeIcon icon={faUser}/> {cars.category}
+                                    <h5 className="mt-3"><strong>{cars.name}</strong></h5>
+                                    {cars.category === "small" ? (
+                                        <h5><small><FontAwesomeIcon icon={faUser}/> 4-6 orang</small></h5>
+                                    )
+                                    :cars.category === "medium" ? (
+                                        <h5><small><FontAwesomeIcon icon={faUser}/> 6-8 orang</small></h5>
+                                    )
+                                    :   <h5><small><FontAwesomeIcon icon={faUser}/> 8-10 orang</small></h5>
+                                    }
                                 </Card.Title>
-                                <Card.Text >
-                                    <Row className="Total">
-                                        <Col  xs={9} md={9} ><h2>Total</h2></Col>
-                                        <Col xs={3} md={3} ><h2>Rp.{cars.price}</h2></Col>
+                                    <Row className='mt-5'>
+                                        <Col  xs={9} md={9} > <h5 className="mt-3">Tentukan Lama Sewa Mobil (max. 7 hari)</h5></Col>
                                     </Row>
-                                </Card.Text>
+                                    <Row className='mt-1'>
+                                        <Col  md={12} >
+                                             <Form.Control type="date" placeholder='pilih tanggal mulai dan akhir sewa'/>
+                                        </Col>
+                                    </Row>
+                                    <Row className='mt-5'>
+                                        <Col xs={9} md={8} > <h5 className="mt-3"><strong>Total</strong></h5></Col>
+                                        <Col xs={3} md={4} > <h5 className="mt-3"><strong>Rp.{cars.price}</strong></h5></Col>
+                                    </Row>
+                                    <Row className='mt-3'>
+                                        <Button  variant="success" size='lg'>Lanjutkan Pembayaran</Button>
+                                    </Row>
                             </Card.Body>
                     </Card>
                 </Col>

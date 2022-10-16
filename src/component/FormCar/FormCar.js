@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Card, Col, Row, Form, Button } from 'react-bootstrap';
 import './FormCar.css'
 
-
+//css untuk combo box saat pilih option background color berubah jd hijau tidak bisa
 
 const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 	return (
@@ -87,7 +87,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 									}
 								>
 									<option>Pilih Status</option>
-									<option value="true">Disewa  </option>
+									<option value="true">Disewakan</option>
 									<option value="false">tidak disewa</option>
 								</Form.Select>
 							</Form.Group>
