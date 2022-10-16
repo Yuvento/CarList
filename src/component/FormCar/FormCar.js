@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Card, Col, Row, Form, Button } from 'react-bootstrap';
+import './FormCar.css'
 
 
 
@@ -7,16 +8,17 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 	return (
 		<Container className="mt-3">
 			<Card>
+				<h6 className="ms-4 mt-2">Pencarianmu</h6>
 				<Row>
 					<Col>
 						<Form>
-							<Form.Group className="mb-3">
+							<Form.Group className="mb-3 ">
 								<Form.Label className="ms-4">
 									<small>Nama Mobil</small>
 								</Form.Label>
-								<Form.Control
+								<Form.Control 
 									size="sm"
-									className="Form-Control ms-4"
+									className="form-color ms-4"
 									type="text"
 									placeholder="Ketik nama/tipe mobil"
 									onChange={(event) =>
@@ -34,7 +36,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								</Form.Label>
 								<Form.Select
 									size="sm"
-									className="Form-Control ms-4"
+									className="form-color ms-4"
 									onChange={(event) =>
 										setForm((prev) => ({
 											...prev,
@@ -42,10 +44,11 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 										}))
 									}
 								>
-									<option> Masukan Kapasitas Mobil</option>
-									<option value="small">4-6 orang</option>
-									<option value="medium">6-8 orang</option>
-									<option value="large">8-10 orang</option>
+										<option> Masukan Kapasitas Mobil</option>
+										<option value="small">4-6 orang</option>
+										<option value="medium">6-8 orang</option>
+										<option value="large">8-10 orang</option>
+									
 								</Form.Select>
 							</Form.Group>
 						</Form>
@@ -58,7 +61,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								</Form.Label>
 								<Form.Select
 									size="sm"
-									className="Form-Control ms-4"
+									className="form-color ms-4"
 									onChange={(event) =>
 										setForm((prev) => ({ ...prev, price: event.target.value }))
 									}
@@ -78,7 +81,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								</Form.Label>
 								<Form.Select
 									size="sm"
-									className="Form-Control ms-4"
+									className="form-color ms-4"
 									onChange={(event) =>
 										setForm((prev) => ({ ...prev, status: event.target.value }))
 									}

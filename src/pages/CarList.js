@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import PlaceholderImage from '../assets/image/no-image.png';
-import FormCar from '../component/searchCar/FormCar';
+import FormCar from '../component/FormCar/FormCar';
+import {useNavigate } from 'react-router-dom';
 
 const CarList = () => {
 	const [cars, setCars] = useState([]);
@@ -43,16 +44,23 @@ const CarList = () => {
 				car.name?.toLowerCase().includes(form.name.toLowerCase()) &&
 				car.category === form.category &&
 				// car.price <= isNumber &&
+				// price ga bs
 				car.status === isRented 				
 			) {
 				return car;
-			}
-			
+			} 
+			return false
 
 		});
 
 		setFilteredCars(filteredData);
 	};
+
+	let navigate = useNavigate()
+
+	const handleViewDetail = (id)=>{
+        navigate(`/cars/{id}`)
+    }
 
 	return (
 		<Container>
@@ -76,7 +84,9 @@ const CarList = () => {
 								<Card.Text className="fw-bold">Rp.{car.price}/Hari</Card.Text>
 								<p className="fw-bold">Mobil impian tapi tidak mampu beli</p>
 								<div className="d-grid gap-2">
-									<Button className="fw-bold" variant="success" size="sm">
+									<Button className="fw-bold" variant="success" size="sm"
+										onClick={()=> handleViewDetail(car.id)}
+									>
 										Pilih Mobil
 									</Button>
 								</div>
