@@ -26,7 +26,7 @@ const CarDetail = () => {
 
     useEffect(()=>{
         getCars()
-    },[]) 
+    }) 
     //warning disini
 
     return (
