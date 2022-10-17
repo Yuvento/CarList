@@ -37,22 +37,25 @@ const CarList = () => {
 	const filterCar = () => {
 		setIsFiltered(true);
 		let isRented = form.status === 'true' ? true : false;
-		// let isNumber = Number(form.price)
-		const filteredData = cars.filter((car) => {
-			if (
-				car.name?.toLowerCase().includes(form.name.toLowerCase()) &&
-				car.category === form.category &&
-				// car.price <= isNumber &&
-				// price ga bs
-				car.status === isRented			
-			) {
-				return car;
-			} 
-			return false
+		let data = cars
+		let isPrice = form.price === '200000' ? data.price < 200000 : data.price > 70000
+		console.log(cars.data)
+        if(form.name !== ""){
+            data = data.filter(item =>
+				item.name?.toLowerCase().includes(form.name.toLowerCase()) 
+			)
+        }
+        if(form.category !== ""){
+            data = data.filter(item => item.category === form.category)
+        }
+		if(form.price !== ""){
+            data = data.filter(item => item.price === isPrice)
+        }
+        if(form.status !== ""){
+            data = data.filter(item => item.status === isRented)
+        }
 
-		});
-
-		setFilteredCars(filteredData);
+		setFilteredCars(data);
 	};
 
 	let navigate = useNavigate()

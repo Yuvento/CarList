@@ -75,8 +75,8 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 									}
 								>
 									<option>Masukan Harga sewa per Hari</option>
-									<option value="200000"> Rp.200.000 - Rp.400.000</option>
-									<option value="500000"> Rp.400.000 - Rp.600.000</option>
+									<option value="200000"> {"<"} Rp. 400.000 </option>
+									<option value="700000"> Rp.400.000 - Rp.600.000</option>
 								</Form.Select>
 							</Form.Group>
 						</Form>
