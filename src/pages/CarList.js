@@ -64,11 +64,10 @@ const CarList = () => {
 	return (
 		<Container>
 			<FormCar isFiltered={isFiltered} onSearchCar={filterCar} setForm={setForm} />
-
 			<Row xs={1} md={4} className="g-4">
 				{filteredCars.map((car) => (
-					<Col>
-						<Card className="mt-5" key={car.id}>
+					<Col key={car.id}>
+						<Card className="mt-5" >
 							{car.image != null ? (
 								<Card.Img src={car.image} />
 							) : (

@@ -1,10 +1,18 @@
 import React from 'react';
 import { Container, Card, Col, Row, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import './FormCar.css'
 
 //css untuk combo box saat pilih option background color berubah jd hijau tidak bisa
 
 const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
+
+	let navigate = useNavigate()
+
+	const handleBack = ()=>{
+        navigate(`/`)
+    }
+
 	return (
 		<Container className="mt-3">
 			<Card>
@@ -97,7 +105,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 						<Button
 							className="mt-4 ms-5"
 							variant={isFiltered ? 'outline-primary' : 'success'}
-							onClick={isFiltered ? () => {} : onSearchCar}
+							onClick={isFiltered ? () => handleBack() : onSearchCar }
 						>
 							{isFiltered ? 'Edit' : 'Cari Mobil'}
 						</Button>
