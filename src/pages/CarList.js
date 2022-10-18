@@ -11,8 +11,8 @@ const CarList = () => {
 	const [filteredCars, setFilteredCars] = useState([]);
 	const [isFiltered, setIsFiltered] = useState(false);
 	const [form, setForm] = useState({
-		name: '',
-		category: '',
+		name: 'aas',
+		category: 'small',
 		price: '',
 		status: '',
 	});
@@ -20,6 +20,13 @@ const CarList = () => {
 	useEffect(() => {
 		getCars();
 	}, []);
+
+	const resetForm = () =>{
+		setFilteredCars([])
+		setIsFiltered(false)
+		setForm((prev)=>({...prev,name:"",category:"",price:"",status:""}))
+		
+	}
 
 	const getCars = async () => {
 		try {
@@ -38,7 +45,6 @@ const CarList = () => {
 		setIsFiltered(true);
 		let isRented = form.status === 'true' ? true : false;
 		let data = cars
-		let isPrice = form.price === '200000' ? data.price < 200000 : data.price > 70000
 		console.log(cars.data)
         if(form.name !== ""){
             data = data.filter(item =>
@@ -48,12 +54,20 @@ const CarList = () => {
         if(form.category !== ""){
             data = data.filter(item => item.category === form.category)
         }
-		if(form.price !== ""){
-            data = data.filter(item => item.price === isPrice)
-        }
         if(form.status !== ""){
             data = data.filter(item => item.status === isRented)
         }
+		if(form.price.length>0){
+			if(form.price === '400000'){
+				data = data.filter(item => item.price < 400000)
+			} else if (form.price === '600000'){
+				data = data.filter(item => item.price > 600000)
+			} else {
+				data = data.filter(
+					item => item.price > 400000 && item.price < 600000
+				)
+			}
+		}
 
 		setFilteredCars(data);
 	};
@@ -66,7 +80,7 @@ const CarList = () => {
 
 	return (
 		<Container>
-			<FormCar isFiltered={isFiltered} onSearchCar={filterCar} setForm={setForm} />
+			<FormCar isFiltered={isFiltered} onSearchCar={filterCar} setForm={setForm} resetForm ={resetForm} form={form}  />
 			<Row xs={1} md={4} className="g-4">
 				{filteredCars.map((car) => (
 					<Col key={car.id}>

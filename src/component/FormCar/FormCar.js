@@ -1,17 +1,9 @@
 import React from 'react';
 import { Container, Card, Col, Row, Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import './FormCar.css'
 
-//css untuk combo box saat pilih option background color berubah jd hijau tidak bisa
 
-const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
-
-	let navigate = useNavigate()
-
-	const handleBack = ()=>{
-        navigate(`/`)
-    }
+const FormCar = ({ isFiltered, onSearchCar, setForm , resetForm , form}) => {
 
 	return (
 		<Container className="mt-3">
@@ -28,6 +20,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 									size="sm"
 									className="form-color ms-4"
 									type="text"
+									value={form.name}
 									placeholder="Ketik nama/tipe mobil"
 									onChange={(event) =>
 										setForm((prev) => ({ ...prev, name: event.target.value }))
@@ -45,6 +38,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								<Form.Select
 									size="sm"
 									className="form-color ms-4"
+									value={form.category}
 									onChange={(event) =>
 										setForm((prev) => ({
 											...prev,
@@ -70,13 +64,15 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								<Form.Select
 									size="sm"
 									className="form-color ms-4"
+									value={form.price}
 									onChange={(event) =>
 										setForm((prev) => ({ ...prev, price: event.target.value }))
 									}
 								>
 									<option>Masukan Harga sewa per Hari</option>
-									<option value="200000"> {"<"} Rp. 400.000 </option>
-									<option value="700000"> Rp.400.000 - Rp.600.000</option>
+									<option value="400000"> {"<"} Rp. 400.000 </option>
+									<option value="600000"> Rp.400.000 - Rp.600.000</option>
+									<option value="700000"> Rp.600.000 - Rp.700.000</option>
 								</Form.Select>
 							</Form.Group>
 						</Form>
@@ -90,6 +86,7 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 								<Form.Select
 									size="sm"
 									className="form-color ms-4"
+									value={form.status}
 									onChange={(event) =>
 										setForm((prev) => ({ ...prev, status: event.target.value }))
 									}
@@ -105,9 +102,9 @@ const FormCar = ({ isFiltered, onSearchCar, setForm }) => {
 						<Button
 							className="mt-4 ms-5"
 							variant={isFiltered ? 'outline-primary' : 'success'}
-							onClick={isFiltered ? () => handleBack() : onSearchCar }
+							onClick={isFiltered ? resetForm : onSearchCar }
 						>
-							{isFiltered ? 'Edit' : 'Cari Mobil'}
+							{isFiltered ? 'Edit' : 'Cari Mobil' }
 						</Button>
 					</Col>
 				</Row>
