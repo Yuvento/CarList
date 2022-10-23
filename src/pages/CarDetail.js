@@ -12,9 +12,10 @@ const CarDetail = () => {
     const [cars, setCars] = useState([]);
     const {id}= useParams();
 
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const getCars = async () => {
 		try {
-            //id gadapat
 			const response = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
 			const data = response.data;
 			setCars(data);
@@ -26,8 +27,9 @@ const CarDetail = () => {
 
     useEffect(()=>{
         getCars()
-    }) 
-    //warning disini
+        console.log("test")
+    },[getCars]) 
+
 
     return (
         <Container>

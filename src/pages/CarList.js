@@ -10,9 +10,10 @@ const CarList = () => {
 	const [cars, setCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
 	const [isFiltered, setIsFiltered] = useState(false);
+	let navigate = useNavigate()
 	const [form, setForm] = useState({
-		name: 'aas',
-		category: 'small',
+		name: '',
+		category: '',
 		price: '',
 		status: '',
 	});
@@ -31,7 +32,7 @@ const CarList = () => {
 	const getCars = async () => {
 		try {
 			const response = await axios.get(
-				'https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?pageSize=10'
+				'https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?pageSize=100'
 			);
 			const data = response.data;
 			setCars(data.cars);
@@ -44,8 +45,7 @@ const CarList = () => {
 	const filterCar = () => {
 		setIsFiltered(true);
 		let isRented = form.status === 'true' ? true : false;
-		let data = cars
-		console.log(cars.data)
+		let data = cars;
         if(form.name !== ""){
             data = data.filter(item =>
 				item.name?.toLowerCase().includes(form.name.toLowerCase()) 
@@ -72,7 +72,6 @@ const CarList = () => {
 		setFilteredCars(data);
 	};
 
-	let navigate = useNavigate()
 
 	const handleViewDetail = (id)=>{
         navigate(`/cars/${id}`)
@@ -85,17 +84,9 @@ const CarList = () => {
 				{filteredCars.map((car) => (
 					<Col key={car.id}>
 						<Card className="mt-5" >
-							{car.image != null ? (
-								<Card.Img src={car.image} />
-							) : (
-								<Card.Img src={PlaceholderImage} />
-							)}
+								<Card.Img src={car.image || PlaceholderImage} />
 							<Card.Body>
-								{car.name != null ? (
-									<Card.Text className="fw-bold">{car.name}</Card.Text>
-								) : (
-									<Card.Text className="fw-bold">name not exist</Card.Text>
-								)}
+									<Card.Text className="fw-bold">{car.name || "Name not Exist !"}</Card.Text>
 								<Card.Text className="fw-bold">Rp.{car.price}/Hari</Card.Text>
 								<p className="fw-bold">Mobil impian tapi tidak mampu beli</p>
 								<div className="d-grid gap-2">
