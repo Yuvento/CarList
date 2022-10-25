@@ -27,8 +27,7 @@ const CarDetail = () => {
 
     useEffect(()=>{
         getCars()
-        console.log("test")
-    },[getCars]) 
+    },[]) 
 
 
     return (
